@@ -1,0 +1,50 @@
+name: Deploy Typst Course Website
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Typst
+        uses: typst-community/setup-typst@v5
+
+      - name: Build website
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      # - name: Upload link report
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: link-report
+      #     path: diagnostics/link_report.txt
+
+      - name: Verify build output
+        run: |
+          find dist
+
+          test -f dist/index.html
+          test -d dist/pages
+          test -d dist/pdf
+          test -d dist/assets
+          test -f dist/assets/css/style.css
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true

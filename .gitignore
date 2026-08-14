@@ -1,0 +1,49 @@
+# ============================================================
+# Build output
+# ============================================================
+
+# Generated/publication output
+dist/*
+
+# Build diagnostics
+diagnostics/*
+
+# Machine-generated intermediate files
+generated/*
+
+# !scripts/lint/generated
+
+# ============================================================
+# Python
+# ============================================================
+
+__pycache__/
+*.py[cod]
+
+
+# ============================================================
+# Python virtual environments
+# ============================================================
+
+.venv/
+venv/
+env/
+
+
+# ============================================================
+# OS / editor files
+# ============================================================
+
+.DS_Store
+.vscode/
+.idea/
+
+
+pdflayout_old.typ
+
+templates/euler/
+
+content/mopss
+
+
+coding/
