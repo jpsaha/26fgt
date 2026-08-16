@@ -73,10 +73,48 @@ BUILD_REPORT = DIAGNOSTICS_DIR / "build_report.txt"
 # Site information
 # ============================================================
 
-SITE_TITLE = "Notes"
+# SITE_TITLE = "Mathematics Lecture Portal"
+# SITE_ICON = "🧮"
+# SITE_TAGLINE = (
+#     "Interactive web modules & downloadable "
+#     "print-ready course material"
+# )
+
+SITE_TITLE = "Notes in Galois Theory · Typeset with Typst"
 SITE_ICON = "🧮"
 SITE_TAGLINE = (
     "These notes may contain typos, "
     "and need not be a faithful representation of any lecture or a course. "
     "Please report any errors you find to the author."
 )
+
+
+# ============================================================
+# SEO / Website
+# ============================================================
+
+# GitHub
+# GITHUB_USERNAME = "username"
+# REPO_NAME = "reponame"
+GITHUB_USERNAME = "jpsaha"
+REPO_NAME = "26fgt"
+
+
+# Website
+SITE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
+# Do not put a trailing / on SITE_URL.
+
+SITE_DESCRIPTION = (
+    "Mathematics lectures, notes, and problem-solving resources."
+)
+
+SITE_AUTHOR = ""
+
+# Default OpenGraph image
+SITE_OG_IMAGE = "/assets/og/default.png"
+
+# Language
+SITE_LANGUAGE = "en"
+
+# Robots
+SITE_ROBOTS = "index, follow"
