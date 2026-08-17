@@ -19,6 +19,9 @@
 
 #page-header(lecture, chap: true)
 
+#let defsize = 13pt; //20pt // 11pt
+#set text(size: defsize)
+
 #include "lec2_content.typ"
 
 #previous-next(lecture)
