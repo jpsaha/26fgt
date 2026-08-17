@@ -1,5 +1,13 @@
 #import "../../templates/course.typ": *
 
+== Field homomorphisms and isomorphisms
+
+#exer[
+  Show that the fields $QQ(sqrt(2)), QQ(sqrt(3))$
+  are not isomorphic.
+  What can be said about the fields $QQ(sqrt(2), sqrt(6)), QQ(sqrt(3), sqrt(6))$?
+]
+
 == Extension of fields
 
 For any field $k$, the ring of polynomials in one variable $x$ over $k$ is 
@@ -20,7 +28,7 @@ The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
 ]
 
 #defn[
-  Let $L slash K$ be a field extension. A *subextension* of $L slash K$ is a field $M$ such that $K subset.eq M subset.eq L$. In this case, we say that $M slash K$ is a subextension of $L slash K$.
+  Let $L slash K$ be a field extension. An *intermediate extension* of $L slash K$ is a field $M$ such that $K subset.eq M subset.eq L$. In this case, we say that $M slash K$ is a subextension of $L slash K$.
 ]
 
 #exer[
@@ -106,10 +114,28 @@ The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
 
 == Degree of field extensions
 
-If $L slash K$ is a field extension, then $L$ can be viewed as a vector space over $K$. In particular, we can consider the dimension of $L$ as a vector space over $K$.
+If $L slash K$ is a field extension, then $L$ can be viewed as a vector space over $K$, where scalar multiplication is given by the field multiplication. In particular, we can consider the dimension of $L$ as a vector space over $K$.
+
+#exer[
+  Show that the map
+  $
+    CC times CC arrow CC, (a, b) mapsto overline(a) b,
+  $
+  where $overline(a)$ denotes the complex conjugate of $a$,
+  defines a $CC$-linear structure on $CC$ that makes $CC$ into a vector space over $CC$.
+]
 
 #defn[
   Let $L slash K$ be a field extension. We say that $L$ is a *finite extension* of $K$ if $L$ is a finite-dimensional vector space over $K$. In this case, we define the *degree* of the extension $L slash K$ to be the dimension of $L$ as a vector space over $K$, and we denote it by $[L : K]$. If $L$ is not finite-dimensional over $K$, we say that the extension is *infinite*.
+]
+
+#exer[
+  Let $L slash K$ be a field extension.
+  Show that the degree of the extension $L slash K$ is equal to $1$ if and only if $L = K$.
+]
+
+#exer[
+  Show that $[k(x) : k] = infinity$ for any field $k$.
 ]
 
 #exer[
@@ -123,6 +149,13 @@ If $L slash K$ is a field extension, then $L$ can be viewed as a vector space ov
     QQ(sqrt(2), sqrt(3)) slash QQ,
     QQ(sqrt(2), root(3, 3)) slash QQ,
     QQ(sqrt(2), sqrt(3), sqrt(5)) slash QQ.
+  $
+]
+
+#exer[
+  Determine the degrees of the following extensions over $QQ$.
+  $
+    QQ(i), QQ(omega), QQ(zeta_n).
   $
 ]
 
@@ -197,6 +230,10 @@ Now let's look at some examples of finite extensions.
   $
 ]
 
+#exer[
+  If an extension has prime degree, show that it has no proper intermediate extensions.
+]
+
 #lemma[
   Let $L slash K$ be a field extension, and let $alpha_1, alpha_2, dots, alpha_n in L$. Then the extension $K(alpha_1, alpha_2, dots, alpha_n) slash K$ is finite if and only if each of the extensions $K(alpha_i) slash K$ is finite for $i = 1, dots, n$.
   Moreover, if these extensions are finite, then we have
@@ -209,6 +246,25 @@ Now let's look at some examples of finite extensions.
 ]
 
 == Algebraic elements and algebraic extensions
+
+#exer[
+  Let $L slash K$ be a field extension, and let $alpha in L$. 
+  
+  - Show that 
+    the multiplication by $alpha$ map, given by
+    $
+      L arrow L, quad  x mapsto alpha x,
+    $
+    defines a $K$-linear transformation of $L$ as a vector space over $K$.
+  - 
+    If $L slash K$ is a finite extension, the characteristic polynomial of this linear transformation is a monic polynomial in $K[x]$ of degree $[L : K]$
+    vanishing at $alpha$.
+
+  - 
+    Assume that $alpha$ is algebraic over $K$, and $L = K(alpha)$. 
+    Prove that the characteristic polynomial of 
+    this linear transformation is equal to the minimal polynomial of $alpha$ over $K$.
+]
 
 #defn[
   Let $L slash K$ be a field extension. An element $alpha in L$ is said to be *algebraic* over $K$ if there exists a non-zero polynomial $f(x) in K[x]$ such that $f(alpha) = 0$. If no such polynomial exists, we say that $alpha$ is *transcendental* over $K$.
@@ -258,7 +314,8 @@ Now let's look at some examples of finite extensions.
 ]
 
 #thm[
-  Let $L slash K$, $K slash F$ be field extensions. If $L slash K, K slash F$ are algebraic extensions, then so is $L slash F$.
+  Let $L slash K$, $K slash F$ be field extensions. 
+  If $L slash K, K slash F$ are algebraic extensions, then so is $L slash F$.
 ]
 
 #lemma[
@@ -276,11 +333,29 @@ Now let's look at some examples of finite extensions.
   The field extension $L slash K$ is called an *algebraic extension* if every element of $L$ is algebraic over $K$. 
 ]
 
+#exer[
+  Let $overline(QQ)$ denote the algebraic closure of $QQ$ in $CC$. 
+  Show that $overline(QQ)$ contains an extension of $QQ$ of degree $n$ for every positive integer $n$. 
+]
+
 == Compositum of field extensions
 
 #defn[
   Let $L_1 slash F$ and $L_2 slash F$ be field extensions, contained in a common extension $K$ of $F$. The *compositum* of $L_1$ and $L_2$ over $F$, denoted by $L_1 L_2$, is defined to be the smallest subfield of $K$ that contains both $L_1$ and $L_2$. In other words, $L_1 L_2$ is the intersection of all subfields of $K$ that contain both $L_1$ and $L_2$.
   The compositum $L_1 L_2$ is also called the *composite field* of $L_1$ and $L_2$ over $F$.
+]
+
+#exer[
+  If $L_1 slash F$ and $L_2 slash F$ are finite extensions contained in a common extension $K$ of $F$, and if 
+  $
+    L_1 = F(alpha_1, alpha_2, dots, alpha_m),
+    quad
+    L_2 = F(beta_1, beta_2, dots, beta_n),
+  $
+  then show that
+  $
+    L_1 L_2 = F(alpha_1, alpha_2, dots, alpha_m, beta_1, beta_2, dots, beta_n).
+  $
 ]
 
 #exer[
