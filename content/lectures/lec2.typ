@@ -2,7 +2,7 @@
 #import "../../templates/course.typ": *
 
 #let lecture = (
-  file: "lec1",
+  file: "lec2",
   type: "lecture",
   number: 1,
   title: "Field extensions",
@@ -19,6 +19,6 @@
 
 #page-header(lecture, chap: true)
 
-#include "lec1_content.typ"
+#include "lec2_content.typ"
 
 #previous-next(lecture)
