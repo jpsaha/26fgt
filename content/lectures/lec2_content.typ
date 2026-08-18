@@ -340,9 +340,9 @@ Now let's look at some examples of finite extensions.
   and it is the largest algebraic extension of $K$ contained in $L$.
 ]
 
-#proof[
-  Let $alpha, beta in L$ be algebraic over $K$. 
-]
+// #proof[
+//   Let $alpha, beta in L$ be algebraic over $K$. 
+// ]
 
 #defn[
   Let $L slash K$ be a field extension. 
