@@ -304,17 +304,17 @@
       inset: 6pt,
       stroke: (left: 3pt + rgb("#2e7d32")),
     )[
-
       #text(weight: "bold")[
         Proof#if title != "" [: #title].
       ]
-
-      #v(4pt)
-
+      #h(0.5em)
       #content
 
-      #align(right)[□]
-
+      #grid(
+        columns: (1fr, auto),
+        [ ],
+        [□],
+      )
     ]
 
   }
