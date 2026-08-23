@@ -43,7 +43,9 @@ The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
 ]
 
 #exer[
+  Let $k$ be a field, and let $k(t)$ be the field of rational functions in one variable $t$ over $k$. 
   Show that any element of $k(t)$ is a root of some quadratic polynomial with coefficients in $k(t^2)$.
+  Determine all field homomorphisms from $k(t)$ to itself that fix $k(t^2)$ pointwise.
 ]
 
 == Generated subfields
@@ -377,9 +379,24 @@ Now let's look at some examples of finite extensions.
 
 #exer[
   Show that if $L_1 slash F$ and $L_2 slash F$ are finite extensions contained in a common extension $K$ of $F$, then the compositum $L_1 L_2 slash F$ is also a finite extension of $F$, and we have
-  $
-    [L_1 L_2 : F] lt.eq [L_1 : F] [L_2 : F].
-  $
+
+  #eqn[
+    $
+      frac((x - 1)^2, x)
+      gt.eq 0
+      .
+    $
+    <eqn-x-plus-1byx>
+  ]
+  @eqn-x-plus-1byx
+
+  // #eqn[
+  //   $
+  //     [L_1 L_2 : F] lt.eq [L_1 : F] [L_2 : F].
+  //   $
+  //   <eqn-degree-compositum>
+  // ]
+  Provide an example of two finite extensions $L_1 slash F$ and $L_2 slash F$ such that the inequality @eqn-degree-compositum is strict.
   Moreover, if $[L_1 : F]$ and $[L_2 : F]$ are coprime, then we have
   $
     [L_1 L_2 : F] = [L_1 : F] [L_2 : F].
