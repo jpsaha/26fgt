@@ -30,3 +30,8 @@
     doc => doc
   }
 }
+
+#let eqn(s) = {
+  set math.equation(numbering: "(1)")
+  s
+}
