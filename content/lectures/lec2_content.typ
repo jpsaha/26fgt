@@ -1,5 +1,56 @@
 #import "../../templates/course.typ": *
 
+== Fields
+
+#example[
+  The following are examples of fields.
+  - The field of rational numbers $QQ$.
+  - The field of real numbers $RR$.
+  - The field of complex numbers $CC$.
+  - For any prime number $p$, 
+    the ring $ZZ slash p ZZ$ of integers modulo $p$ is a field, denoted by $FF_p$.
+  - For any prime number $p$ and positive integer $n$, there exists a unique (up to isomorphism) finite field of order $p^n$, denoted by $FF_(p^n)$.
+]
+
+#exer[
+  Show that the following are not fields.
+  - The ring of integers $ZZ$.
+  - The ring of polynomials $QQ[x]$ in one variable $x$ over $QQ$.
+  - The ring of polynomials $RR[x, y]$ in two variables $x, y$ over $RR$.
+]
+
+#exer[
+  Show that any finite integral domain is a field.
+]
+
+#exer[
+  Show that any finite field has order $p^n$ for some prime number $p$ and positive integer $n$.
+]
+
+#example("Field of Rational Functions")[
+  For any field $k$, the ring of polynomials in one variable $x$ over $k$ is 
+  denoted by $k[x]$.
+  The field of rational functions in one variable $x$ over $k$ is denoted by $k(x)$,
+  and it consists of all elements of the form $f(x) / g(x)$, where $f(x), g(x) in k[x]$ and $g(x) eq.not 0$.
+  The field $k(x)$ is the field of fractions of the integral domain $k[x]$,  
+  and it is called the *field of rational functions* in one variable $x$ over $k$.
+  // The field $k(x)$ can also be viewed as the *function field* of the affine line over $k$.
+]
+
+#example("Field of Laurent Series")[
+  For any field $k$, the *ring of formal power series* in one variable $x$ over $k$ is 
+  denoted by $k[[x]]$.
+  The *field of formal Laurent series* in one variable $x$ over $k$ is denoted by $k((x))$,
+  and it consists of the generalized formal power series,
+  that is, all elements of the form 
+  $
+    sum_(n gt.eq n_0) a_n x^n
+  $
+  for some integer $n_0$, where $a_n in k$ for all $n gt.eq n_0$ and $a_(n_0) eq.not 0$.
+  The field $k((x))$ is the field of fractions of the integral domain $k[[x]]$,  
+  and it is called the *field of formal Laurent series* in one variable $x$ over $k$.
+]
+
 == Field homomorphisms and isomorphisms
 
 #defn[
@@ -21,12 +72,6 @@
 
 == Extension of fields
 
-For any field $k$, the ring of polynomials in one variable $x$ over $k$ is 
-denoted by $k[x]$.
-The field of rational functions in one variable $x$ over $k$ is denoted by $k(x)$,
-and it consists of all elements of the form $f(x) / g(x)$, where $f(x), g(x) in k[x]$ and $g(x) eq.not 0$.
-The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
-
 #defn[
   Let $K$ be a field. A *field extension* of $K$ is a field $L$ that contains $K$ as a subfield. We often denote a field extension by $L slash K$, which indicates that $L$ is an extension of $K$. The field $K$ is called the *base field*, and the field $L$ is called the *extension field*.
 ]
@@ -35,11 +80,20 @@ The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
   - The field of complex numbers $CC$ is an extension of the field of real numbers $RR$. 
   - Similarly, the field of real numbers $RR$ is an extension of the field of rational numbers $QQ$.
   - For any field $k$, the field of rational functions $k(x)$ in one variable $x$ over $k$ is an extension of $k$.
-  - $k((x))$
+  - For any field $k$, the field of formal Laurent series $k((x))$ in one variable $x$ over $k$ is an extension of $k$.
 ]
 
 #defn[
   Let $L slash K$ be a field extension. An *intermediate extension* of $L slash K$ is a field $M$ such that $K subset.eq M subset.eq L$. In this case, we say that $M slash K$ is a subextension of $L slash K$.
+]
+
+#example[
+  For any field $k$, the field of rational functions $k(x)$ in one variable $x$ over $k$ is an extension of $k$. The field of rational functions $k(x^2)$ in one variable $x^2$ over $k$ is an intermediate extension of $k(x) slash k$.
+]
+
+#example[
+  For any field $k$, the field of formal Laurent series $k((x))$ in one variable $x$ over $k$ is an extension of $k$. 
+  The field of formal rational functions $k(x)$ in one variable $x$ over $k$ is an intermediate extension of $k((x)) slash k$.
 ]
 
 #exer[
@@ -107,10 +161,10 @@ The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
   $
 ]
 
-#defn[
+#remark[
   Let $L slash K$ be a field extension, 
   and let $alpha_1, alpha_2, dots, alpha_n in L$.
-  Then the field $K({alpha_1, alpha_2, dots, alpha_n})$ is denoted by $K(alpha_1, alpha_2, dots, alpha_n)$.
+  Then the field $K({alpha_1, alpha_2, dots, alpha_n})$ is also denoted by $K(alpha_1, alpha_2, dots, alpha_n)$.
 ]
 
 #exer[
@@ -129,6 +183,17 @@ The field $k(x)$ is the field of fractions of the integral domain $k[x]$.
 
 #exer[
   Show that $QQ(sqrt(2), omega)$ is equal to $QQ(sqrt(2) + omega)$, where $omega$ denotes a primitive cube root of unity in $CC$.
+]
+
+#example[
+  Let $n$ be a positive integer, and let $zeta_n$ denote a primitive $n$-th root of unity in $CC$. 
+  Then the extension $QQ(zeta_n)$ of $QQ$, generated $zeta_n$, 
+  is called the *cyclotomic extension* of $QQ$ 
+  obtained by adjoining the $n$-th roots of unity.
+]
+
+#exer[
+  Determine the degree of the cyclotomic extension $QQ(zeta_n)$ over $QQ$ for $n = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10$.
 ]
 
 == Degree of field extensions
@@ -355,6 +420,7 @@ Now let's look at some examples of finite extensions.
 #exer[
   Let $overline(QQ)$ denote the algebraic closure of $QQ$ in $CC$. 
   Show that $overline(QQ)$ contains an extension of $QQ$ of degree $n$ for every positive integer $n$. 
+  Using this, show that $overline(QQ)$ is an infinite extension of $QQ$.
 ]
 
 == Compositum of field extensions
@@ -379,26 +445,184 @@ Now let's look at some examples of finite extensions.
 
 #exer[
   Show that if $L_1 slash F$ and $L_2 slash F$ are finite extensions contained in a common extension $K$ of $F$, then the compositum $L_1 L_2 slash F$ is also a finite extension of $F$, and we have
-
   #eqn[
     $
-      frac((x - 1)^2, x)
-      gt.eq 0
-      .
+      [L_1 L_2 : F] lt.eq [L_1 : F] [L_2 : F].
     $
-    <eqn-x-plus-1byx>
+    <eqn-degree-compositum>
   ]
-  @eqn-x-plus-1byx
-
-  // #eqn[
-  //   $
-  //     [L_1 L_2 : F] lt.eq [L_1 : F] [L_2 : F].
-  //   $
-  //   <eqn-degree-compositum>
-  // ]
   Provide an example of two finite extensions $L_1 slash F$ and $L_2 slash F$ such that the inequality @eqn-degree-compositum is strict.
   Moreover, if $[L_1 : F]$ and $[L_2 : F]$ are coprime, then we have
   $
     [L_1 L_2 : F] = [L_1 : F] [L_2 : F].
+  $
+]
+
+== Automorphisms of field extensions
+
+#defn[
+  Let $L slash K$ be a field extension. The set of all $K$-automorphisms of $L$, denoted by $#math.op("Gal") (L slash K)$, is called the *Galois group* of $L$ over $K$, and is defined as the set of all field automorphisms of $L$ that fix $K$ pointwise. 
+]
+
+#exer[
+  Show that $#math.op("Gal") (L slash K)$ is a group under composition of maps.
+]
+
+#lemma[
+  Let $L slash K$ be a field extension, and let $X$ be a subset of $L$
+  such that $L = K(X)$. Show that any $K$-automorphism of $L$ is uniquely determined by its action on the elements of $X$,
+  that is, if $sigma, tau$ are $K$-automorphisms of $L$ such that $sigma(x) = tau(x)$ for all $x in X$, then $sigma = tau$.
+]
+
+#lemma[
+  Let $L slash K$ be a field extension, and let $alpha$ be an element of $L$ that is algebraic over $K$. Show that any $K$-automorphism $sigma$ of $L$ maps $alpha$ to a root of the minimal polynomial of $alpha$ over $K$,
+  and $sigma(alpha)$ is also algebraic over $K$ with the same minimal polynomial as $alpha$.
+]
+
+#corollary[
+  Let $L slash K$ be a field extension of finite degree.
+  Then $#math.op("Gal") (L slash K)$ is a finite group.
+]
+
+#exer[
+  Determine the Galois group of the following field extensions.
+  - $QQ(sqrt(2)) slash QQ$.
+  - $QQ(sqrt(2), sqrt(3)) slash QQ$.
+  - $QQ(sqrt(2), root(3, 3)) slash QQ$.
+  - $QQ(sqrt(2), sqrt(3), sqrt(5)) slash QQ$.
+  - $QQ(root(3, 3)) slash QQ$.
+  - $QQ(i) slash QQ$.
+  - $C slash RR$.
+  - $k(t) slash k(t^2)$ where $k$ is a field.
+]
+
+#exer[
+  Let $k$ be a field. 
+  - Determine whether $k[t] slash (t^2 + 1)$ is a field. If it is a field, determine its Galois group over $k$.
+  - Determine whether $k[t] slash (t^2 + t + 1)$ is a field. If it is a field, determine its Galois group over $k$.
+]
+
+#remark[
+  Let $K slash F$ be a field extension, and let $L$ be an intermediate extension of $K slash F$. 
+  Then the Galois group of $K$ over $L$ 
+  is a subgroup of the Galois group of $K$ over $F$.
+]
+
+#defn[
+  Let $K slash F$ be a field extension, and let $L$ be an intermediate extension of $K slash F$. 
+  If $H$ is a subgroup of the Galois group of $K$ over $F$, then the *fixed field* of $H$, 
+  is denoted by $K^H$, and is defined to be the set of all elements of $K$ that are fixed by every automorphism in $H$.
+  For any subset $S$ of $#math.op("Gal") (K slash F)$, we define the *fixed field* of $S$ to be
+  $
+    K^S = {x in K : sigma(x) = x #text[for all] sigma in S}.
+  $
+]
+
+#exer[
+  Show that the fixed field $K^H$ of a subgroup $H$ of the Galois group of $K$ over $F$ is an intermediate extension of $K slash F$.
+  For any subset $S$ of $#math.op("Gal") (K slash F)$, show that the fixed field $K^S$ is equal to the intermediate extension $K^(chevron.l S chevron.r)$ of $K slash F$,
+  where $chevron.l S chevron.r$ denotes the subgroup of $#math.op("Gal") (K slash F)$ generated by $S$.
+]
+
+Thus far we have seen that the Galois group $#math.op("Gal") (K slash F)$ of a field extension $K slash F$ is a group, and the fixed field $K^H$ of a subgroup $H$ of $#math.op("Gal") (K slash F)$ is an intermediate extension of $K slash F$,
+and we have also seen that the Galois group of $K$ over an intermediate extension $L$ is a subgroup of $#math.op("Gal") (K slash F)$.
+// In fact, there is a one-to-one correspondence between the subgroups of the Galois group and the intermediate extensions of $K slash F$, which is known as the *Fundamental Theorem of Galois Theory*.
+
+#exer[
+  Determine the Galois group of the extension $QQ(sqrt(2), root(3, 3)) slash QQ$ and its subgroups, and determine the corresponding intermediate extensions of $QQ(sqrt(2), root(3, 3)) slash QQ$.
+  Are there more intermediate extensions than subgroups of the Galois group?
+]
+
+#exer[
+  Are there similar examples in positive characteristic?
+]
+
+#exer[
+  Are there more intermediate extensions than subgroups of the Galois group for the extension $QQ(sqrt(2), sqrt(3)) slash QQ$?
+]
+
+#lemma[
+  Let $K slash F$ be a field extension. Then the following statements hold.
+  -  
+    The map
+    $
+      {L colon L #text[is a subextension of ] K slash F}
+      arrow
+      {H colon H #text[is a subgroup of ] #math.op("Gal") (K slash F)}
+      ,
+    $
+    given by 
+    $
+      L arrow.r.long.squiggly #math.op("Gal") (K slash L),
+    $
+    is inclusion-reversing, that is, if $L_1, L_2$ are intermediate extensions of $K slash F$ such that $L_1 subset.eq L_2$, then we have
+    $
+      #math.op("Gal") (K slash L_2) subset.eq #math.op("Gal") (K slash L_1).
+    $
+
+  -
+    The map
+    $
+      {L colon L #text[is a subextension of ] K slash F}
+      arrow.l
+      {H colon H #text[is a subgroup of ] #math.op("Gal") (K slash F)},
+    $
+    given by
+    $
+      K^H arrow.l.long.squiggly H,
+    $
+    is also inclusion-reversing, that is, if $H_1, H_2$ are subgroups of $#math.op("Gal") (K slash F)$ such that $H_1 subset.eq H_2$, then we have
+    $
+      K^(H_1) supset.eq K^(H_2).
+    $
+  - 
+    For any intermediate extension $L$ of $K slash F$, we have
+    $
+      L subset.eq K^(#math.op("Gal") (K slash L)).
+    $
+    In particular, for any subgroup $H$ of $#math.op("Gal") (K slash F)$, we have
+    $
+      K^H = K^(#math.op("Gal") (K slash K^H)).
+    $
+  - 
+    For any subset $S$ of $#math.op("Gal") (K slash F)$, we have
+    $
+      S subset.eq #math.op("Gal") (K slash K^(S)).
+    $
+    In particular, for any intermediate extension $L$ of $K slash F$, we have
+    $
+      #math.op("Gal") (K slash L) = #math.op("Gal") (K slash K^(#math.op("Gal") (K slash L))).
+    $
+]
+
+#corollary[
+  Let $K slash F$ be a field extension.
+  Then the maps
+  $
+    L arrow.r.long.squiggly #math.op("Gal") (K slash L),
+    quad
+    H arrow.r.long.squiggly K^H
+  $
+  provide an inclusion-reversing one-to-one correspondence between the set of all intermediate extensions of $K slash F$ 
+  which are the fixed fields of subgroups of $#math.op("Gal") (K slash F)$,
+  and the set of all subgroups of $#math.op("Gal") (K slash F)$
+  which are the Galois groups of $K$ over intermediate extensions of $K slash F$.
+]
+
+Note that any field automorphism $sigma$ of $K$
+can be viewed as a group homomorphism from $K^times$ to itself, where $K^times$ denotes the multiplicative group of non-zero elements of $K$. 
+
+#defn[
+  Let $G$ be a group, and let $K$ be a field. A *character* of $G$ over $K$ is a group homomorphism from $G$ to the multiplicative group $K^times$ of non-zero elements of $K$. The set of all characters from $G$ to $K$ is denoted by $#math.op("Hom") (G, K^times)$.
+]
+
+#lemma("Dedekind")[
+  Let $sigma_1, dots, sigma_n$ be distinct characters of a group $G$ over a field $K$. Then the characters $sigma_1, dots, sigma_n$ are linearly independent over $K$, that is, if we have a linear combination
+  $
+    sum_(i=1)^n c_i sigma_i = 0
+  $
+  for some $c_1, dots, c_n in K$, then we must have
+  $
+    c_1 = c_2 = dots = c_n = 0.
   $
 ]
