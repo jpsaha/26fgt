@@ -594,6 +594,7 @@ and we have also seen that the Galois group of $K$ over an intermediate extensio
       #math.op("Gal") (K slash L) = #math.op("Gal") (K slash K^(#math.op("Gal") (K slash L))).
     $
 ]
+// <lemma-Galois-correspondence>
 
 #corollary[
   Let $K slash F$ be a field extension.
@@ -607,6 +608,24 @@ and we have also seen that the Galois group of $K$ over an intermediate extensio
   which are the fixed fields of subgroups of $#math.op("Gal") (K slash F)$,
   and the set of all subgroups of $#math.op("Gal") (K slash F)$
   which are the Galois groups of $K$ over intermediate extensions of $K slash F$.
+]
+
+Note that the inclusion-reversing one-to-one correspondence in 
+// @lemma-Galois-correspondence 
+the above lemma
+is not necessarily a one-to-one correspondence between all intermediate extensions of $K slash F$ and all subgroups of $#math.op("Gal") (K slash F)$, since there may be intermediate extensions of $K slash F$ that are not fixed fields of any subgroup of $#math.op("Gal") (K slash F)$, and there may be subgroups of $#math.op("Gal") (K slash F)$ that are not Galois groups of $K$ over any intermediate extension of $K slash F$.
+It is natural to ask when the above inclusion-reversing one-to-one correspondence is a one-to-one correspondence between all intermediate extensions of $K slash F$ and all subgroups of $#math.op("Gal") (K slash F)$.
+A necessary condition for this to happen is that the fixed field of the Galois group $#math.op("Gal") (K slash F)$ is equal to $F$, that is, we have
+$
+  K^(#math.op("Gal") (K slash F)) = F.
+$
+This leads to the following definition.
+
+#defn[
+  Let $K$ be an algebraic extension of a field $F$. We say that $K slash F$ is a *Galois extension* if the fixed field of the Galois group $#math.op("Gal") (K slash F)$ is equal to $F$, that is, we have
+  $
+    K^(#math.op("Gal") (K slash F)) = F.
+  $
 ]
 
 Note that any field automorphism $sigma$ of $K$
@@ -625,4 +644,54 @@ can be viewed as a group homomorphism from $K^times$ to itself, where $K^times$ 
   $
     c_1 = c_2 = dots = c_n = 0.
   $
+]
+
+The following result is a consequence of Dedekind's lemma.
+
+#proposition[
+  Let $K slash F$ be a finite extension. Then
+  the Galois group $#math.op("Gal") (K slash F)$ is a finite group, and
+  its order is at most the 
+  degree of the extension $K slash F$, that is, we have
+  $
+    |#math.op("Gal") (K slash F)| lt.eq [K : F].
+  $
+]
+
+#proposition[
+  Let $G$ be a finite subgroup of the group of automorphisms of a field $K$. 
+  Then the order of $G$ is equal to the degree of the extension $K slash K^G$, that is, we have
+  $
+    |G| = [K : K^G].
+  $
+  Consequently, the extension $K slash K^G$ is finite and Galois, and 
+  has $G$ as its Galois group, that is, we have
+  $
+    G = #math.op("Gal") (K slash K^G).
+  $
+]
+
+#corollary[
+  A finite extension $K slash F$ is Galois if and only if the order of the Galois group $#math.op("Gal") (K slash F)$ is equal to the degree of the extension $K slash F$, that is, we have
+  $
+    |#math.op("Gal") (K slash F)| = [K : F].
+  $
+]
+
+#corollary[
+  Let $K slash F$ be a field extension, and let $alpha in K$ be algebraic over $F$.
+  Then the order of the Galois group $#math.op("Gal") (F(alpha) slash F)$ is equal to 
+  the number of distinct roots of the minimal polynomial of $alpha$ over $F$ in $F(alpha)$.
+  Consequently, the extension $F(alpha) slash F$ is Galois if and only if 
+  the number of distinct roots of the minimal polynomial of $alpha$ over $F$ in $F(alpha)$ is equal to 
+  the degree of the extension $F(alpha) slash F$.
+]
+
+#exer[
+  Determine the Galois group of the extension $QQ(root(3, 3)) slash QQ$ and its subgroups, and determine the corresponding intermediate extensions of $QQ(root(3, 3)) slash QQ$.
+]
+
+#exer[
+  Similar problem as the previous exercise, but for the extension $k(t) slash k(t^2)$, 
+  or for the extension $k(t) slash k(t^p)$ for any prime $p$ and any field $k$ of characteristic $p$.
 ]
