@@ -1,6 +1,6 @@
 import json
 
-from .config import HOMEPAGE_TYP, HOMEPAGE_JSON
+from scripts.config import HOMEPAGE_TYP, HOMEPAGE_JSON
 from .typst import write_field, write_header
 
 

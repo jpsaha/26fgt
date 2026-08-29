@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 
-from .config import BOOK_TYP
+from scripts.config import BOOK_TYP
 from .typst import write_header
 
 
@@ -66,6 +66,10 @@ def write_imports(file, title=None):
         '  report-style: true,\n'
         '  flipp: false,\n'
         ')\n\n'
+    )
+
+    file.write(
+        '#toc\n\n'
     )
 
 

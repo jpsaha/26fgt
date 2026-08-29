@@ -21,13 +21,7 @@ from html.parser import HTMLParser
 from urllib.parse import urlparse, unquote
 import sys
 
-from scripts.config import ROOT
-
-DIST = ROOT / "dist"
-
-REPORT_DIR = ROOT / "diagnostics"
-
-REPORT = REPORT_DIR / "link_report.txt"
+from scripts.config import ROOT, DIST_DIR, DIAGNOSTICS_DIR, LINK_REPORT
 
 
 # ============================================================
@@ -90,7 +84,7 @@ def resolve_link(source, link):
         return None
 
     if path.startswith("/"):
-        return DIST / path.lstrip("/")
+        return DIST_DIR / path.lstrip("/")
 
     return source.parent / path
 
@@ -176,12 +170,12 @@ def write_report(
 ):
     """Write the link-check report."""
 
-    REPORT_DIR.mkdir(
+    DIAGNOSTICS_DIR.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    with REPORT.open(
+    with LINK_REPORT.open(
         "w",
         encoding="utf-8",
     ) as file:
@@ -293,16 +287,16 @@ def write_report(
 
 def main():
 
-    if not DIST.exists():
+    if not DIST_DIR.exists():
 
         print(
-            f"ERROR: {DIST} does not exist."
+            f"ERROR: {DIST_DIR} does not exist."
         )
 
         return 1
 
     html_files = sorted(
-        DIST.rglob("*.html")
+        DIST_DIR.rglob("*.html")
     )
 
     if not html_files:
@@ -365,7 +359,7 @@ def main():
     )
 
     print(
-        f"Report     : {REPORT}"
+        f"Report     : {LINK_REPORT}"
     )
 
     if broken:

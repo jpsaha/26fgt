@@ -1,4 +1,5 @@
 // theorem / definition / exercise
+#import "theorems.typ": thm-env
 #import "render.typ": block-container
 #import "colors.typ": block-colors
 #import "block-engine.typ": make-block
@@ -544,16 +545,45 @@
 // }
 // 
 
-#let make-block-arg(kind, label) = {
-  (..args) => {
-    let args = args.pos()
+// #let make-block-arg(kind, label) = {
+//   (..args) => {
+//     let args = args.pos()
 
-    if args.len() == 1 {
-      make-block(kind, label, none, args.at(0))
-    } else {
-      make-block(kind, label, args.at(0), args.at(1))
-    }
+//     if args.len() == 1 {
+//       make-block(kind, label, none, args.at(0))
+//     } else {
+//       make-block(kind, label, args.at(0), args.at(1))
+//     }
+//   }
+// }
+
+#let make-block-arg(kind, label) = {
+  let fmt(
+    name,
+    number,
+    body,
+    title: auto,
+    ..args,
+  ) = {
+    make-block(
+      kind,
+      label,
+      if title == auto { none } else { title },
+      body,
+    )
   }
+
+  thm-env(
+    kind,
+    fmt,
+    base: none,
+    base-level: none,
+    number-fn: math-number,
+  ).with(
+    numbering: "1.1",
+    supplement: label,
+    restate-keys: (kind,),
+  )
 }
 
 #let theorem = make-block-arg("theorem", "Theorem")

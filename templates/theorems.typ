@@ -109,6 +109,7 @@
   fmt,
   base: none,
   base-level: none,
+  number-fn: none,
 ) = {
 
   let global_numbering = numbering
@@ -189,10 +190,13 @@
 
     result = result + context {
       let loc = here()
-      let number__ = number_
-      if number__ == auto and numbering != none {
-        number__ = thm-counters.at(loc).latest
-        number__ = global_numbering(numbering, ..number__)
+      let number__ = if number-fn != none {
+        number-fn()
+      } else if number_ == auto and numbering != none {
+        let n = thm-counters.at(loc).latest
+        global_numbering(numbering, ..n)
+      } else {
+        number_
       }
       thm-stored.update(x => {
         let thm = (
@@ -230,7 +234,7 @@
       [#metadata(counter) <meta:thm-env-counter>],
       kind: "thm-env",
       outlined: false,
-      caption: name,
+      caption: none,
       supplement: supplement,
       numbering: numbering,
     )

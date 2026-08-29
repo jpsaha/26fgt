@@ -1,4 +1,40 @@
+#!/usr/bin/env python3
+
+"""
+Central configuration for the Typst mathematics lecture website.
+
+This module contains the project's shared configuration:
+
+    - Project paths
+    - Source directories
+    - Generated-file paths
+    - Distribution paths
+    - Diagnostic paths
+    - Website identity
+    - SEO configuration
+    - Open Graph configuration
+    - Build-mode configuration
+
+Build scripts should import project-specific paths and settings
+from this module rather than constructing them independently.
+
+This module should contain configuration only. Build operations
+belong in the scripts/build/, scripts/metadata/, scripts/lint/,
+and scripts/og/ modules.
+"""
+
+import os
 from pathlib import Path
+
+from scripts.site_config import (
+    GITHUB_USERNAME,
+    REPO_NAME,
+    SITE_DESCRIPTION,
+    SITE_TITLE,
+    SITE_SUBTITLE,
+    SITE_ICON,
+    SITE_TAGLINE,
+)
 
 
 # ============================================================
@@ -14,43 +50,48 @@ from pathlib import Path
 #     parents[0] = scripts/
 #     parents[1] = project root
 #
-# Keeping the project root here provides a single source of
-# truth for all project paths used throughout the build system.
 # ============================================================
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(
+    __file__
+).resolve().parents[1]
 
 
 # ============================================================
 # Project directories
 # ============================================================
+#
+# Central definitions of the major project directories.
+#
+# Build, metadata, lint, reference, and OG scripts should use
+# these paths rather than reconstructing them independently.
+# ============================================================
 
 CONTENT_DIR = ROOT / "content"
+
+SCRIPTS_DIR = ROOT / "scripts"
+
 TEMPLATES_DIR = ROOT / "templates"
+
 GENERATED_DIR = ROOT / "generated"
+
 DIAGNOSTICS_DIR = ROOT / "diagnostics"
 
-# Generated Open Graph sources and images.
-#
-# Example:
-#
-#     generated/og/gt/lec1.asy
-#     generated/og/gt/lec1.png
-#
-GENERATED_OG_DIR = GENERATED_DIR / "og"
+DIST_DIR = ROOT / "dist"
 
 
 # ============================================================
-# Source directories
+# Source assets
 # ============================================================
-
-# Static assets supplied directly by the project.
+#
+# Static assets supplied by the project.
 #
 # These are copied into:
 #
 #     dist/assets/
 #
 # during dist preparation.
+#
 # ============================================================
 
 ASSETS_SOURCE_DIR = ROOT / "assets"
@@ -59,26 +100,93 @@ ASSETS_SOURCE_DIR = ROOT / "assets"
 # ============================================================
 # Project source files
 # ============================================================
+#
+# Top-level Typst source files belonging to the project.
+# ============================================================
 
 BOOK_SOURCE = ROOT / "book_source.typ"
+
 PAGES_SOURCE = ROOT / "pages_source.typ"
-PDFLAYOUT = ROOT / "templates" / "pdflayout.typ"
+
+PDFLAYOUT = TEMPLATES_DIR / "pdflayout.typ"
 
 
 # ============================================================
-# Generated files
+# Project configuration files
+# ============================================================
+#
+# Configuration files themselves are defined here so that
+# scripts do not need to reconstruct their locations.
+#
+# ============================================================
+
+CONFIG_FILE = SCRIPTS_DIR / "config.py"
+
+
+# ============================================================
+# Generated metadata / Typst files
 # ============================================================
 #
 # These files are produced by the metadata/build pipeline.
-# They should not normally be edited by hand.
+#
+# They should not normally be edited manually.
+#
 # ============================================================
 
-LECTURES_TYP = GENERATED_DIR / "lectures.typ"
-BOOK_TYP = GENERATED_DIR / "book.typ"
-PAGES_TYP = GENERATED_DIR / "pages.typ"
-PAGES_META_TYP = GENERATED_DIR / "pages_meta.typ"
-HOMEPAGE_TYP = GENERATED_DIR / "homepage.typ"
-HOMEPAGE_JSON = GENERATED_DIR / "homepage.json"
+LECTURES_TYP = (
+    GENERATED_DIR / "lectures.typ"
+)
+
+BOOK_TYP = (
+    GENERATED_DIR / "book.typ"
+)
+
+PAGES_TYP = (
+    GENERATED_DIR / "pages.typ"
+)
+
+PAGES_META_TYP = (
+    GENERATED_DIR / "pages_meta.typ"
+)
+
+HOMEPAGE_TYP = (
+    GENERATED_DIR / "homepage.typ"
+)
+
+HOMEPAGE_JSON = (
+    GENERATED_DIR / "homepage.json"
+)
+
+REFMAP_JSON = (
+    GENERATED_DIR / "refmap.json"
+)
+
+
+# ============================================================
+# Generated Open Graph files
+# ============================================================
+#
+# OG generation happens outside dist/.
+#
+# Example:
+#
+#     generated/
+#     └── og/
+#         ├── lec1.asy
+#         ├── lec1.png
+#         └── ...
+#
+# These are working/generated files.
+#
+# Published OG images belong in:
+#
+#     dist/assets/og/
+#
+# ============================================================
+
+GENERATED_OG_DIR = (
+    GENERATED_DIR / "og"
+)
 
 
 # ============================================================
@@ -92,122 +200,107 @@ HOMEPAGE_JSON = GENERATED_DIR / "homepage.json"
 #
 #     dist/
 #     ├── index.html
+#     ├── sitemap.xml
+#     ├── robots.txt
 #     ├── pages/
 #     ├── pdf/
 #     └── assets/
 #         ├── css/
 #         └── og/
+#
 # ============================================================
 
-DIST_DIR = ROOT / "dist"
+PAGES_DIR = (
+    DIST_DIR / "pages"
+)
 
-PAGES_DIR = DIST_DIR / "pages"
-PDF_DIR = DIST_DIR / "pdf"
-ASSETS_DIR = DIST_DIR / "assets"
+PDF_DIR = (
+    DIST_DIR / "pdf"
+)
 
-INDEX_HTML = DIST_DIR / "index.html"
+ASSETS_DIR = (
+    DIST_DIR / "assets"
+)
+
+OG_DIR = (
+    ASSETS_DIR / "og"
+)
+
+INDEX_HTML = (
+    DIST_DIR / "index.html"
+)
+
+SITEMAP_XML = (
+    DIST_DIR / "sitemap.xml"
+)
+
+ROBOTS_TXT = (
+    DIST_DIR / "robots.txt"
+)
 
 
 # ============================================================
 # Diagnostic files
 # ============================================================
-
-IMPORTS_DOT = DIAGNOSTICS_DIR / "imports.dot"
-
-METADATA_REPORT = DIAGNOSTICS_DIR / "metadata_report.txt"
-GENERATED_REPORT = DIAGNOSTICS_DIR / "generated_report.txt"
-LINK_REPORT = DIAGNOSTICS_DIR / "link_report.txt"
-
-BUILD_REPORT = DIAGNOSTICS_DIR / "build_report.txt"
-
-# Historical/commented reference:
 #
-# DOT = DIAGNOSTICS_DIR / "imports.dot"
-
-
-# ============================================================
-# Site information
+# Diagnostic output is kept separate from generated website
+# output and is not intended for publication.
+#
 # ============================================================
 
-# ------------------------------------------------------------
-# Previous site configuration
-# ------------------------------------------------------------
-#
-# Kept here for reference in case the site identity is changed
-# back to the simpler portal-style presentation.
-# ------------------------------------------------------------
+IMPORTS_DOT = (
+    DIAGNOSTICS_DIR / "imports.dot"
+)
 
-# SITE_TITLE = "Mathematics Lecture Portal"
-# SITE_ICON = "🧮"
-# SITE_TAGLINE = (
-#     "Interactive web modules & downloadable "
-#     "print-ready course material"
-# )
+METADATA_REPORT = (
+    DIAGNOSTICS_DIR / "metadata_report.txt"
+)
 
+GENERATED_REPORT = (
+    DIAGNOSTICS_DIR / "generated_report.txt"
+)
 
-# ------------------------------------------------------------
-# Current site identity
-# ------------------------------------------------------------
+LINK_REPORT = (
+    DIAGNOSTICS_DIR / "link_report.txt"
+)
 
-SITE_TITLE = "Notes on Galois Theory"
-SITE_SUBTITLE = "Typeset with Typst"
+BUILD_REPORT = (
+    DIAGNOSTICS_DIR / "build_report.txt"
+)
 
-SITE_ICON = "🧮"
-
-SITE_TAGLINE = (
-    "These notes may contain typos, "
-    "and need not be a faithful representation of any lecture or a course. "
-    "The omitted proofs may be found in (m)any reference(s) on Galois theory. "
-    "Please report any errors you find to the author."
+CONFIG_REPORT = (
+    DIAGNOSTICS_DIR / "config_report.txt"
 )
 
 
 # ============================================================
-# SEO / Website
+# Website identity
 # ============================================================
-
-# ------------------------------------------------------------
-# GitHub repository
-# ------------------------------------------------------------
 #
-# GitHub username and repository name are kept separately so
-# that SITE_URL can be constructed automatically.
+# The basic site identity is defined in:
 #
-# Example:
+#     scripts/site_config.py
 #
-#     https://jpsaha.github.io/typst-site
-# ------------------------------------------------------------
-
-# GITHUB_USERNAME = "username"
-# REPO_NAME = "reponame"
-
-GITHUB_USERNAME = "jpsaha"
-REPO_NAME = "26fgt"
+# This module imports that identity and derives URL/build
+# related settings from it.
+#
+# ============================================================
 
 
 # ------------------------------------------------------------
 # Website URL
 # ------------------------------------------------------------
 #
-# Do not put a trailing "/" on SITE_URL.
+# No trailing "/" is used.
 #
-# This value is used when constructing canonical URLs and
-# absolute Open Graph / Twitter image URLs.
-# ------------------------------------------------------------
-
-SITE_URL = f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
-
-
-# ------------------------------------------------------------
-# Site-wide description
-# ------------------------------------------------------------
+# Example:
 #
-# Used as the fallback description when an individual page
-# does not provide its own description.
-# ------------------------------------------------------------
+#     https://jpsaha.github.io/typst-site
+#
+# ============================================================
 
-SITE_DESCRIPTION = (
-    "Mathematics lectures, notes, and problem-solving resources."
+SITE_URL = (
+    f"https://{GITHUB_USERNAME}.github.io/{REPO_NAME}"
 )
 
 
@@ -216,30 +309,6 @@ SITE_DESCRIPTION = (
 # ------------------------------------------------------------
 
 SITE_AUTHOR = ""
-
-
-# ------------------------------------------------------------
-# Default Open Graph image
-# ------------------------------------------------------------
-#
-# Used when a page does not have a page-specific OG image.
-#
-# The source image is:
-#
-#     assets/og/default.png
-#
-# and it is copied during dist preparation to:
-#
-#     dist/assets/og/default.png
-#
-# Its public URL is therefore:
-#
-#     /assets/og/default.png
-#
-# This is a PUBLIC URL, not a filesystem path.
-# ------------------------------------------------------------
-
-SITE_OG_IMAGE = "/assets/og/default.png"
 
 
 # ------------------------------------------------------------
@@ -257,31 +326,269 @@ SITE_ROBOTS = "index, follow"
 
 
 # ============================================================
-# Open Graph generation
+# Open Graph build mode
 # ============================================================
 #
-# The following settings are shared by the OG generation
-# scripts. They belong here rather than being duplicated in:
+# These values define the default Open Graph generation policy.
 #
-#     scripts/og/generate_og.py
-#     scripts/og/build_og.py
+#     TYPST_OG_BUILD
+#         Default for local builds.
 #
-# This keeps OG-related configuration in one place.
+#     TYPST_OG_GITBUILD
+#         Default for GitHub Actions builds.
+#
+# The effective setting used by the build is:
+#
+#     TYPST_OG
+#
+# See the "Effective Open Graph setting" section below for
+# the complete precedence and environment-variable behavior.
+#
+# ------------------------------------------------------------
+# Local builds
+# ------------------------------------------------------------
+#
+# False:
+#     Reuse existing/committed OG PNG images.
+#
+# True:
+#     Generate OG .asy sources and PNG images.
+#
+# ------------------------------------------------------------
+# GitHub Actions
+# ------------------------------------------------------------
+#
+# False:
+#     Reuse committed OG PNG images.
+#
+# True:
+#     Generate OG images during the GitHub build.
+#
+# When enabled on GitHub, the workflow must provide:
+#
+#     Asymptote
+#     TeX Live
+#     ImageMagick
+#
+# ============================================================
+
+TYPST_OG_BUILD = False
+
+TYPST_OG_GITBUILD = False
+
+
+# ============================================================
+# ===========OLD GITHUB ACTION STUFF==========================
+# ============================================================
+# IS_GITHUB_ACTIONS = (
+#     os.environ.get("GITHUB_ACTIONS", "").lower() == "true"
+# )
+
+
+# if not IS_GITHUB_ACTIONS and "TYPST_OG_BUILD" in os.environ:
+
+#     TYPST_OG = (
+#         os.environ["TYPST_OG_BUILD"].lower() == "true"
+#     )
+
+# else:
+
+#     TYPST_OG = (
+#         TYPST_OG_GITBUILD
+#         if IS_GITHUB_ACTIONS
+#         else TYPST_OG_BUILD
+#     )
+# ============================================================
+# ===========OLD GITHUB ACTION STUFF==========================
 # ============================================================
 
 
-# ------------------------------------------------------------
-# Asymptote template
-# ------------------------------------------------------------
+# ============================================================
+# GitHub Actions detection
+# ============================================================
+#
+# Used to distinguish local builds from GitHub Actions builds
+# when determining the effective OG build mode.
+#
+# ============================================================
+
+IS_GITHUB_ACTIONS = (
+    os.environ.get(
+        "GITHUB_ACTIONS",
+        "",
+    ).lower()
+    == "true"
+)
+
+
+# ============================================================
+# Boolean environment helper
+# ============================================================
+#
+# Read a boolean environment variable.
+#
+# Accepted true values:
+#
+#     1
+#     true
+#     yes
+#     on
+#
+# Accepted false values:
+#
+#     0
+#     false
+#     no
+#     off
+#
+# Unknown values fall back to the supplied default.
+#
+# ============================================================
+
+def env_bool(
+    name,
+    default=False,
+):
+    """
+    Read a boolean environment variable.
+
+    Accepted true values:
+
+        1
+        true
+        yes
+        on
+
+    Accepted false values:
+
+        0
+        false
+        no
+        off
+
+    Unknown values fall back to default.
+    """
+
+    value = os.environ.get(name)
+
+    if value is None:
+        return default
+
+    value = value.strip().lower()
+
+    if value in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }:
+        return True
+
+    if value in {
+        "0",
+        "false",
+        "no",
+        "off",
+    }:
+        return False
+
+    return default
+
+
+# ============================================================
+# Effective Open Graph setting
+# ============================================================
+#
+# Priority:
+#
+#     GitHub Actions
+#         → TYPST_OG_GITBUILD
+#
+#     Local + TYPST_OG_BUILD environment variable
+#         → environment variable value
+#
+#     Normal local build
+#         → TYPST_OG_BUILD from config.py
+#
+# Important:
+#
+# TYPST_OG_BUILD does not override TYPST_OG_GITBUILD
+# on GitHub Actions.
+#
+# ============================================================
+
+if IS_GITHUB_ACTIONS:
+
+    TYPST_OG = TYPST_OG_GITBUILD
+
+else:
+
+    TYPST_OG = env_bool(
+        "TYPST_OG_BUILD",
+        default=TYPST_OG_BUILD,
+    )
+
+
+# ============================================================
+# Default Open Graph image
+# ============================================================
+#
+# This is a PUBLIC URL.
+#
+# It is NOT a filesystem path.
+#
+# Published file:
+#
+#     dist/assets/og/default.png
+#
+# Public URL:
+#
+#     /assets/og/default.png
+#
+# ============================================================
+
+SITE_OG_IMAGE = (
+    "/assets/og/default.png"
+)
+
+
+# ============================================================
+# Open Graph directories
+# ============================================================
+#
+# These names are kept separately because they describe the
+# two different stages of the OG pipeline:
+#
+#     OG_GENERATED_DIR
+#         Generated/intermediate OG files.
+#
+#     OG_PUBLISHED_DIR
+#         Final public OG images under dist/.
+#
+# ============================================================
+
+# Generated OG sources and intermediate PNG files.
+
+OG_GENERATED_DIR = (
+    GENERATED_DIR / "og"
+)
+
+# Published OG images.
+
+OG_PUBLISHED_DIR = (
+    DIST_DIR / "assets" / "og"
+)
+
+
+# ============================================================
+# Open Graph template
+# ============================================================
 #
 # Template used to generate Asymptote source files.
 #
 #     scripts/og/og_template.asy
 #
-# This is a project-level configuration path because changing
-# the template location should not require modifying the OG
-# generation code.
-# ------------------------------------------------------------
+# ============================================================
 
 OG_TEMPLATE_FILE = (
     ROOT
@@ -291,30 +598,58 @@ OG_TEMPLATE_FILE = (
 )
 
 
-# ------------------------------------------------------------
-# Final Open Graph image dimensions
-# ------------------------------------------------------------
+# ============================================================
+# Open Graph image dimensions
+# ============================================================
 #
-# Standard Open Graph landscape dimensions:
+# Standard landscape Open Graph dimensions:
 #
 #     1200 × 630 pixels
 #
-# These values are used by build_og.py when converting the
-# intermediate PDF into the final PNG.
-# ------------------------------------------------------------
+# ============================================================
 
 OG_WIDTH = 1200
+
 OG_HEIGHT = 630
 
 
-# ------------------------------------------------------------
-# Open Graph rasterization density
-# ------------------------------------------------------------
+# ============================================================
+# Open Graph rasterization
+# ============================================================
 #
 # Asymptote first produces an intermediate PDF.
 #
-# ImageMagick then rasterizes that PDF at this density before
-# resizing the result to OG_WIDTH × OG_HEIGHT.
-# ------------------------------------------------------------
+# ImageMagick then rasterizes that PDF at the configured
+# density and resizes the result to exactly:
+#
+#     1200 × 630
+#
+# ============================================================
 
 OG_DENSITY = 300
+
+OG_FILTER = "Lanczos"
+
+
+# ============================================================
+# Open Graph file format
+# ============================================================
+
+OG_FORMAT = "png"
+
+
+# ============================================================
+# Open Graph public path
+# ============================================================
+#
+# Public URL prefix for generated OG images.
+#
+# Example:
+#
+#     /assets/og/lec1.png
+#
+# ============================================================
+
+OG_PUBLIC_PATH = (
+    "/assets/og"
+)

@@ -4,22 +4,7 @@
 # ============================================================
 
 from scripts.config import GENERATED_DIR
-
-# ============================================================
-# Generated files
-# ============================================================
-
-LECTURES_TYP = GENERATED_DIR / "lectures.typ"
-
-PAGES_TYP = GENERATED_DIR / "pages.typ"
-
-PAGES_META_TYP = GENERATED_DIR / "pages_meta.typ"
-
-BOOK_TYP = GENERATED_DIR / "book.typ"
-
-HOMEPAGE_TYP = GENERATED_DIR / "homepage.typ"
-
-HOMEPAGE_JSON = GENERATED_DIR / "homepage.json"
+# , LECTURES_TYP, PAGES_TYP, PAGES_META_TYP, HOMEPAGE_JSON, HOMEPAGE_TYP, BOOK_TYP
 
 # ============================================================
 # Category books
@@ -32,7 +17,7 @@ HOMEPAGE_JSON = GENERATED_DIR / "homepage.json"
 # Keeping it as a separate constant makes the purpose
 # explicit and allows us to move category books later
 # without changing write_book.py.
-CATEGORY_BOOK_DIR = GENERATED_DIR
+# CATEGORY_BOOK_DIR = GENERATED_DIR
 
 # ============================================================
 # Metadata

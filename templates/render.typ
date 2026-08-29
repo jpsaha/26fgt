@@ -83,7 +83,7 @@
 #let page-header(lecture, chap: false) = {
   
   if is-html {
-    html-nav-header()
+    // html-nav-header()
     breadcrumb(lecture)
     download-buttons(lecture)
 
@@ -97,7 +97,7 @@
       ),
     )[
       #if lecture.number != none {
-        [#lecture.number: ]
+        [#lecture.number. ]
         // [Lecture #lecture.number: ]
       }
       #lecture.title

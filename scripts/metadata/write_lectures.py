@@ -1,4 +1,4 @@
-from .config import LECTURES_TYP
+from scripts.config import LECTURES_TYP
 from .typst import write_field, write_header
 
 

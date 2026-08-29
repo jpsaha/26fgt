@@ -14,16 +14,127 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # ========================================================
+      # Checkout
+      # ========================================================
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # ========================================================
+      # Install Typst
+      # ========================================================
+
       - name: Install Typst
         uses: typst-community/setup-typst@v5
+
+      # ========================================================
+      # Read GitHub OG configuration
+      #
+      # scripts/config.py contains:
+      #
+      #     TYPST_OG_GITBUILD = False
+      #
+      # normally.
+      #
+      # This value controls whether the GitHub build regenerates
+      # Open Graph images.
+      #
+      # Normally:
+      #
+      #     TYPST_OG_GITBUILD = False
+      #
+      # so GitHub reuses the committed OG PNGs.
+      # ========================================================
+
+      - name: Read OG build configuration
+        run: |
+          TYPST_OG_GITBUILD=$(python3 -c \
+            'from scripts.config import TYPST_OG_GITBUILD; print(str(TYPST_OG_GITBUILD).lower())')
+
+          echo "TYPST_OG_GITBUILD=$TYPST_OG_GITBUILD" >> "$GITHUB_ENV"
+
+          echo "TYPST_OG_GITBUILD=$TYPST_OG_GITBUILD"
+
+      # ========================================================
+      # Install Asymptote
+      #
+      # Only required when GitHub is generating OG images.
+      # ========================================================
+
+      - name: Install Asymptote
+        if: env.TYPST_OG_GITBUILD == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y asymptote
+
+      # ========================================================
+      # Install TeX dependencies for Asymptote
+      #
+      # Only required when GitHub is generating OG images.
+      # ========================================================
+
+      - name: Install TeX dependencies
+        if: env.TYPST_OG_GITBUILD == 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-fonts-recommended \
+            texlive-latex-extra
+
+      # ========================================================
+      # Install ImageMagick 7
+      #
+      # build_og.py uses the ImageMagick 7 "magick" command.
+      #
+      # Only required when GitHub is generating OG images.
+      # ========================================================
+
+      - name: Install ImageMagick
+        if: env.TYPST_OG_GITBUILD == 'true'
+        run: |
+          wget -q \
+            https://github.com/ImageMagick/ImageMagick/releases/download/7.1.2-28/ImageMagick-7.1.2-28-gcc-x86_64.AppImage \
+            -O /tmp/magick
+
+          chmod +x /tmp/magick
+          sudo mv /tmp/magick /usr/local/bin/magick
+
+      # ========================================================
+      # Verify build tools
+      #
+      # Typst is always required.
+      #
+      # OG tools are checked only when OG generation is enabled.
+      # ========================================================
+
+      - name: Verify build tools
+        run: |
+          typst --version
+
+          if [[ "$TYPST_OG_GITBUILD" == "true" ]]; then
+            asy --version
+            magick --version
+          else
+            echo "OG generation disabled on GitHub."
+            echo "Asymptote, TeX Live, and ImageMagick are not required."
+          fi
+
+      # ========================================================
+      # Build website
+      # ========================================================
 
       - name: Build website
         run: |
           chmod +x build.sh
           ./build.sh
+
+      # ========================================================
+      # Optional: Upload diagnostics
+      # ========================================================
 
       # - name: Upload link report
       #   if: always()
@@ -31,6 +142,10 @@ jobs:
       #   with:
       #     name: link-report
       #     path: diagnostics/link_report.txt
+
+      # ========================================================
+      # Verify build output
+      # ========================================================
 
       - name: Verify build output
         run: |
@@ -40,7 +155,40 @@ jobs:
           test -d dist/pages
           test -d dist/pdf
           test -d dist/assets
+
           test -f dist/assets/css/style.css
+
+      # ========================================================
+      # Verify Open Graph images
+      #
+      # OG images are validated by check_og.py during the build.
+      #
+      # It is valid for this directory to contain:
+      #
+      #   - only default.png
+      #   - several page-specific PNGs
+      #   - both default and page-specific PNGs
+      #
+      # The directory itself may also contain no PNGs if no page
+      # requires an OG image. Therefore, do not fail merely
+      # because the PNG count is zero.
+      # ========================================================
+
+      - name: Verify Open Graph images
+        run: |
+          test -d dist/assets/og
+
+          echo "Open Graph images:"
+          find dist/assets/og -type f -name "*.png" -print
+
+          count=$(find dist/assets/og -type f -name "*.png" | wc -l | tr -d ' ')
+
+          echo "Found $count Open Graph PNG image(s)."
+
+
+      # ========================================================
+      # Deploy to GitHub Pages
+      # ========================================================
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4

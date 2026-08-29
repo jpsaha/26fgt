@@ -1,4 +1,4 @@
-from .config import PAGES_TYP, PAGES_META_TYP
+from scripts.config import PAGES_TYP, PAGES_META_TYP
 from .typst import write_field, write_header
 
 

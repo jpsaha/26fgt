@@ -5,6 +5,30 @@
 # Generated/publication output
 dist/*
 
+# ------------------------------------------------------------
+# Locally generated Open Graph PNGs
+#
+# Keep all dist/ output ignored except:
+#
+#     dist/assets/og/**/*.png
+#
+# These PNGs are generated locally and committed so that
+# GitHub deployment does not need LaTeX, Asymptote, or
+# ImageMagick.
+# ------------------------------------------------------------
+
+!dist/assets/
+dist/assets/*
+
+!dist/assets/og/
+dist/assets/og/*
+
+# Allow OG subdirectories
+!dist/assets/og/**/
+
+# Allow generated OG PNG files
+!dist/assets/og/**/*.png
+
 # Build diagnostics
 diagnostics/*
 
@@ -38,6 +62,13 @@ env/
 .vscode/
 .idea/
 
+
+
+# ============================================================
+# Assets
+# ============================================================
+
+assets/og/default.pdf
 
 pdflayout_old.typ
 
