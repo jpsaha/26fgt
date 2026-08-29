@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jpsaha.github.io/26fgt/sitemap.xml

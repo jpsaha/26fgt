@@ -1,0 +1,573 @@
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+
+/*
+ * Global colors and semantic component colors.
+ *
+ * The light-mode values are defined here.
+ * Native dark mode overrides these values below.
+ */
+
+:root {
+
+    /* --------------------------------------------------------
+       General site colors
+       -------------------------------------------------------- */
+
+    --bg: #ffffff;
+    --text: #222222;
+    --text-muted: #4a5568;
+    --text-secondary: #666666;
+
+    --border: #e9ecef;
+    --nav-bg: #f8f9fa;
+    --primary: #0066cc;
+
+
+    /* --------------------------------------------------------
+       Math-card semantic colors
+       -------------------------------------------------------- */
+
+    --theorem-stroke: #0066cc;
+    --theorem-bg: #f0f7ff;
+
+    --definition-stroke: #2e7d32;
+    --definition-bg: #f1f8e9;
+
+    --exercise-stroke: #c62828;
+    --exercise-bg: #ffebee;
+
+    --details-bg: #ffffff;
+    --details-border: #ffcdd2;
+
+
+    /* --------------------------------------------------------
+       Dashboard / action-button colors
+       -------------------------------------------------------- */
+
+    --btn-web-bg: #f1f3f5;
+    --btn-web-text: #495057;
+
+    --btn-pdf-bg: #fff0f6;
+    --btn-pdf-text: #c2255c;
+    --btn-pdf-border: #ffdeeb;
+
+
+    /* --------------------------------------------------------
+       Download-button colors
+       -------------------------------------------------------- */
+
+    --download-bg: #0b63ce;
+    --download-bg-hover: #084fa3;
+    --download-text: #ffffff;
+
+
+    /* --------------------------------------------------------
+       Breadcrumb colors
+       -------------------------------------------------------- */
+
+    --breadcrumb-separator: #d01a1a;
+}
+
+
+/* ============================================================
+   2. NATIVE DARK MODE
+   ============================================================ */
+
+/*
+ * Automatically follows the user's operating-system/browser
+ * color-scheme preference.
+ *
+ * Only color tokens are overridden here.
+ * Layout and component structure remain unchanged.
+ */
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+
+        /* ----------------------------------------------------
+           General site colors
+           ---------------------------------------------------- */
+
+        --bg: #121212;
+        --text: #e2e8f0;
+        --text-muted: #cbd5e0;
+        --text-secondary: #cbd5e0;
+
+        --border: #2d3748;
+        --nav-bg: #1a202c;
+        --primary: #339af0;
+
+
+        /* ----------------------------------------------------
+           Math-card semantic colors
+           ---------------------------------------------------- */
+
+        --theorem-stroke: #339af0;
+        --theorem-bg: #141c2b;
+
+        --definition-stroke: #48bb78;
+        --definition-bg: #112417;
+
+        --exercise-stroke: #f56565;
+        --exercise-bg: #2d1717;
+
+        --details-bg: #1d1d1d;
+        --details-border: #4a2323;
+
+
+        /* ----------------------------------------------------
+           Dashboard / action-button colors
+           ---------------------------------------------------- */
+
+        --btn-web-bg: #2d3748;
+        --btn-web-text: #e2e8f0;
+
+        --btn-pdf-bg: #2b1b22;
+        --btn-pdf-text: #ff85a0;
+        --btn-pdf-border: #4a2332;
+
+
+        /* ----------------------------------------------------
+           Download-button colors
+           ---------------------------------------------------- */
+
+        --download-bg: #339af0;
+        --download-bg-hover: #5aaaf5;
+        --download-text: #121212;
+
+
+        /* ----------------------------------------------------
+           Breadcrumb colors
+           ---------------------------------------------------- */
+
+        --breadcrumb-separator: #f87171;
+    }
+
+
+    /* --------------------------------------------------------
+       Ensure MathML follows the dark-mode text color.
+       -------------------------------------------------------- */
+
+    math,
+    math * {
+        color: var(--text) !important;
+    }
+}
+
+
+/* ============================================================
+   3. BASE PAGE LAYOUT
+   ============================================================ */
+
+/*
+ * Main document body.
+ */
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Roboto, sans-serif;
+
+    background-color: var(--bg);
+    color: var(--text);
+
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 24px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   4. MATH CARDS
+   ============================================================ */
+
+/*
+ * Common layout for theorem, definition, and exercise cards.
+ */
+
+.math-card {
+    border-left: 5px solid transparent;
+
+    padding: 18px;
+    margin: 24px 0;
+
+    border-radius: 0 6px 6px 0;
+}
+
+
+/* ------------------------------------------------------------
+   Card semantic variants
+   ------------------------------------------------------------ */
+
+.math-card.theorem {
+    border-left-color: var(--theorem-stroke);
+    background-color: var(--theorem-bg);
+}
+
+.math-card.definition {
+    border-left-color: var(--definition-stroke);
+    background-color: var(--definition-bg);
+}
+
+.math-card.exercise {
+    border-left-color: var(--exercise-stroke);
+    background-color: var(--exercise-bg);
+}
+
+
+/* ------------------------------------------------------------
+   Card title and body
+   ------------------------------------------------------------ */
+
+.math-card-title {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.math-card-body {
+    display: block;
+}
+
+
+/* ------------------------------------------------------------
+   Card title semantic colors
+   ------------------------------------------------------------ */
+
+.theorem .math-card-title {
+    color: var(--theorem-stroke);
+}
+
+.definition .math-card-title {
+    color: var(--definition-stroke);
+}
+
+.exercise .math-card-title {
+    color: var(--exercise-stroke);
+}
+
+
+/* ============================================================
+   5. EXERCISE SOLUTION PANEL
+   ============================================================ */
+
+/*
+ * Interactive exercise solution drawer / accordion.
+ */
+
+.exercise-solution-panel {
+    margin-top: 14px;
+
+    background-color: var(--details-bg);
+    border: 1px solid var(--details-border);
+
+    border-radius: 6px;
+    padding: 12px;
+}
+
+
+/* ------------------------------------------------------------
+   Solution-panel summary
+   ------------------------------------------------------------ */
+
+.exercise-solution-panel summary {
+    font-weight: bold;
+    color: var(--exercise-stroke);
+
+    cursor: pointer;
+    outline: none;
+}
+
+
+/* ------------------------------------------------------------
+   Solution body
+   ------------------------------------------------------------ */
+
+.exercise-solution-panel .solution-body {
+    margin-top: 10px;
+    padding-top: 8px;
+
+    border-top: 1px dashed var(--details-border);
+}
+
+
+/* ============================================================
+   6. GLOBAL NAVIGATION
+   ============================================================ */
+
+/*
+ * Navigation header used on site pages.
+ */
+
+.global-nav-header {
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--border);
+
+    padding: 14px 24px;
+    margin: -24px -24px 32px -24px;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+
+/* ------------------------------------------------------------
+   Navigation links
+   ------------------------------------------------------------ */
+
+.global-nav-header .nav-link {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+
+/* ------------------------------------------------------------
+   Home navigation link
+   ------------------------------------------------------------ */
+
+.global-nav-header .nav-link.home {
+    color: var(--text);
+    font-weight: bold;
+}
+
+
+/* ------------------------------------------------------------
+   Navigation separator
+   ------------------------------------------------------------ */
+
+.global-nav-header .nav-divider {
+    color: var(--border);
+}
+
+
+/* ============================================================
+   7. HOMEPAGE / DASHBOARD
+   ============================================================ */
+
+/*
+ * Main homepage container.
+ */
+
+.index-container {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+
+/* ------------------------------------------------------------
+   Homepage header
+   ------------------------------------------------------------ */
+
+.index-header {
+    text-align: center;
+
+    margin-bottom: 40px;
+
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 20px;
+}
+
+.index-header h1 {
+    font-size: 2.3rem;
+    margin: 0 0 10px 0;
+}
+
+.index-header .site-subtitle {
+    color: var(--text-muted);
+    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+}
+
+.index-header .site-tagline {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Lecture list
+   ------------------------------------------------------------ */
+
+.lecture-list {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ------------------------------------------------------------
+   Individual lecture row
+   ------------------------------------------------------------ */
+
+.lecture-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.lecture-row span {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+
+/* ------------------------------------------------------------
+   Lecture action links
+   ------------------------------------------------------------ */
+
+.lecture-links {
+    display: flex;
+    gap: 12px;
+}
+
+
+/* ============================================================
+   8. ACTION BUTTONS
+   ============================================================ */
+
+/*
+ * Common button styling.
+ */
+
+.btn {
+    padding: 8px 16px;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+
+    transition: opacity 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+
+/* ------------------------------------------------------------
+   Web button
+   ------------------------------------------------------------ */
+
+.btn-web {
+    background-color: var(--btn-web-bg);
+    color: var(--btn-web-text);
+}
+
+
+/* ------------------------------------------------------------
+   PDF button
+   ------------------------------------------------------------ */
+
+.btn-pdf {
+    background-color: var(--btn-pdf-bg);
+    color: var(--btn-pdf-text);
+    border: 1px solid var(--btn-pdf-border);
+}
+
+
+/* ============================================================
+   9. LECTURE METADATA
+   ============================================================ */
+
+.lecture-meta {
+    font-family: system-ui, sans-serif;
+
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    padding: 0.5rem 0;
+}
+
+
+/* ============================================================
+   10. BREADCRUMBS
+   ============================================================ */
+
+/*
+ * Breadcrumb navigation displayed above lecture content.
+ */
+
+.breadcrumb {
+    margin: 1rem 0 0.5rem;
+
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+
+/* ------------------------------------------------------------
+   Breadcrumb links
+   ------------------------------------------------------------ */
+
+.breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+
+/* ------------------------------------------------------------
+   Breadcrumb separators
+   ------------------------------------------------------------ */
+
+.breadcrumb-sep {
+    margin: 0 0.4em;
+    color: var(--breadcrumb-separator);
+}
+
+
+/* ============================================================
+   11. DOWNLOAD BUTTONS
+   ============================================================ */
+
+.download-buttons {
+    margin: 0.6rem 0 1rem;
+}
+
+
+/* ------------------------------------------------------------
+   Download links
+   ------------------------------------------------------------ */
+
+.download-buttons a {
+    display: inline-block;
+
+    padding: 0.35rem 0.8rem;
+    margin-right: 0.5rem;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    background: var(--download-bg);
+    color: var(--download-text);
+
+    font-size: 0.9rem;
+}
+
+
+/* ------------------------------------------------------------
+   Download-link hover state
+   ------------------------------------------------------------ */
+
+.download-buttons a:hover {
+    background: var(--download-bg-hover);
+}
