@@ -743,6 +743,6 @@ The following result is a consequence of Dedekind's lemma.
 ]
 
 #exer[
-  Provide an example of a field $K$ such that $#math.op("Aut") (K)$ contains an element of finite order. 
+  Provide an example of a field $K$ such that $#math.op("Aut") (K)$ contains an element of infinite order. 
 ]
 
