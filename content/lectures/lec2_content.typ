@@ -798,4 +798,5 @@ The following result is a consequence of Dedekind's lemma.
 #exer[
   Determine the number of intermediate extensions of the extension 
   $k(x, y) slash k(x^p, y^p)$, where $k$ is a field of characteristic $p$ and $x, y$ are algebraically independent over $k$.
+  Is the extension $k(x, y) slash k(x^p, y^p)$ simple? Is it Galois?
 ]
