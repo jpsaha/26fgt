@@ -786,6 +786,11 @@ The following result is a consequence of Dedekind's lemma.
 == Fundamental Theorem of Galois Theory
 
 #exer[
+  If $K$ is the splitting field of an irreducible separable polynomial $f(x)$ over a field $F$, show that 
+  the degree of the extension $K slash F$ is divisible by the degree of the polynomial $f(x)$.
+]
+
+#exer[
   Prove that the extension $QQ(root(3, 3), omega) slash QQ$ is Galois, where $omega$ denotes a primitive cube root of unity in $CC$.
   Determine the Galois group of this extension and its subgroups, and determine the corresponding intermediate extensions of $QQ(root(3, 3), omega) slash QQ$.
 ]
