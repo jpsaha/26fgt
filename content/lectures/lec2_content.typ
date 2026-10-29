@@ -746,3 +746,51 @@ The following result is a consequence of Dedekind's lemma.
   Provide an example of a field $K$ such that $#math.op("Aut") (K)$ contains an element of infinite order. 
 ]
 
+#exer[
+  Determine the splitting field of the polynomial $x^4 - 5$
+  over 
+  each of the following fields: 
+  $
+    QQ, FF_2, FF_3, FF_5, FF_7, FF_11.
+  $
+]
+
+#exer[
+  Let $K$ be a normal extension of a field $F$, 
+  and let $f(x)$ be an irreducible polynomial in $F[x]$.
+  Let $g_1(x), g_2(x)$ be monic irreducible factors of $f(x)$ in $K[x]$. Show that there exists an automorphism $sigma$ of $K$ over $F$ such that $sigma(g_1(x)) = g_2(x)$.
+]
+
+#exer[
+  Let $K, L$ be extensions of a field $F$ contained in a common extension $M$ of $F$. 
+  Show that $K L$ is normal over $F$ if both $K$ and $L$ are normal over $F$. Does the converse hold?
+]
+
+== Seperable and inseperable extensions
+
+#exer[
+  Provide an example of a field extension $K slash F$ 
+  which is neither separable nor inseparable.
+]
+
+#exer[
+  Provide an example of a field extension $K slash F$
+  which is separable but not Galois.
+]
+
+#exer[
+  Provide an example of a field extension $K slash F$
+  which is normal but not Galois.
+]
+
+== Fundamental Theorem of Galois Theory
+
+#exer[
+  Prove that the extension $QQ(root(3, 3), omega) slash QQ$ is Galois, where $omega$ denotes a primitive cube root of unity in $CC$.
+  Determine the Galois group of this extension and its subgroups, and determine the corresponding intermediate extensions of $QQ(root(3, 3), omega) slash QQ$.
+]
+
+#exer[
+  Determine the number of intermediate extensions of the extension 
+  $k(x, y) slash k(x^p, y^p)$, where $k$ is a field of characteristic $p$ and $x, y$ are algebraically independent over $k$.
+]
